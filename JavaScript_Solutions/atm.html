@@ -4,9 +4,9 @@
         <meta charset"utf-8">
         <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
     <style>
-     body {
+     #body {
         color:white;
-        background-image:url("https://ak8.picdn.net/shutterstock/videos/6984508/thumb/1.jpg");
+        /* background-image:url("https://ak8.picdn.net/shutterstock/videos/6984508/thumb/1.jpg"); */
         background-size:cover;
      }
      header {
@@ -27,6 +27,9 @@
      #amount, #deposit, #withdrawal, #check_history, #check_interest, #history, #interest_output, #output{
         display:flex;
         align-items:center;
+        text-align: center;
+        height: 50px;
+        width: 200px;
         margin: 0% 30% 1% 30%;
      }
 
@@ -80,7 +83,7 @@
         <div id="c"><span>History</span></div><div id="history"></div>
 
         <script>
-
+            let body = document.querySelector('#body')
             let deposit_ = document.querySelector('#deposit')
             let amount_ = document.querySelector('#amount')
             let withdrawal_ = document.querySelector('#withdrawal')
@@ -89,10 +92,11 @@
             let history_ = document.querySelector('#check_history')
             let int_output = document.querySelector('#interest_output')
             let history_display = document.querySelector('#history')
-            let account = 0
+            let account = 5000
             let amount = 0
             let interest = 0.1
-            let history = []
+            let history = ['hi iqmar']
+            let deposit_count = 0
 
             check_interest.onclick = function check_interest(){
                 int_output.innerText = account * interest
@@ -103,6 +107,11 @@
                 history.push('deposited $' + amount)
                 account += amount
                 output_.innerText = account
+                deposit_count += 1
+                console.log(deposit_count)
+            }
+            if (deposit_count >= 5){
+                document.querySelector('#body').style.color = "red";
             }
 
             withdrawal_.onclick = function withdrawal(){
