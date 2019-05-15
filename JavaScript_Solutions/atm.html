@@ -4,9 +4,20 @@
         <meta charset"utf-8">
         <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
     <style>
+
+    .flex{
+        display: flex;
+        flex-direction: row;
+    }
+    h1{
+        padding-left: 8%;
+        font-size: 210%;
+    }
+    #image{
+        margin-left: 4%;
+    }
      #body {
-        /* background-color:rgb(147,112,219); */
-        background-image:url("https://ak8.picdn.net/shutterstock/videos/6984508/thumb/1.jpg");
+        background-color: aquamarine;
         background-size:cover;
      }
      header {
@@ -15,72 +26,69 @@
         font-size: 160%;
         background-color:rgba(188,188,188,.4);
         margin: 3% 30% 1% 30%;
-        padding: 0%
+        padding: 0%;
+        border-radius: 12px;
      }
-     .flex {
-        display:flex;
-        flex-direction:row;
-        align-items:center;
-        flex-wrap:wrap;
-        justify-content:space-evenly;
-     }
-     #amount, #deposit, #withdrawal, #check_history, #check_interest, #history, #interest_output, #output{
-        display:flex;
-        align-items:center;
-        text-align: center;
-        height: 50px;
-        width: 200px;
-        margin: 0% 30% 1% 30%;
-     }
+     #amount{
+         margin-left: 44%;
+         width: 12%;
+         height: 12%;
+         text-align: center;
 
-     #a {
-        color: black;
-        display:flex;
-        align-items:center;
-        margin: 0% 30% .3% 30%;
-        text-decoration: underline;
      }
-     #b {
-        color: black;
-        display:flex;
-        align-items:center;
-        margin: 0% 30% .3% 30%;
-        text-decoration: underline;
+     
+     #atm_btn{
+         display: flex;
+         flex-direction: row;
+         margin-left: 24%;
      }
-     #c {
-        color: black;
-        display:flex;
-        align-items:center;
-        margin: 0% 30% .3% 30%;
-        text-decoration: underline;
+     #atm_btn button{
+         color: rgba(0,0,0,.7);
+         width: 15%;
+         height: 50%;
+         border-radius: 8px;
+         margin: 2%1%2%1%;
      }
     </style>
     </head>
     <body>
         <header class="flex">
             <h1>Virtual Atm</h1>
-            <img src="https://bohapus.com/image/catalog/facilities/withdrawing-money-from-atm.png" width = 25%/>
+            <img id="image" src="https://bohapus.com/image/catalog/facilities/withdrawing-money-from-atm.png" width="25%" height="25%"/>
         </header>
 
-        <input id="amount" type="text" placeholder="amount"/>
+        <input id="amount" type="text" placeholder="Desired Amount"/>
 
-        <div>
-            <button id="deposit">Make Deposit</button>
+        <div id="atm_btn">
+            <button>Make Deposit</button>
+            <button>Withdrawal</button>
+            <button>History</button>
+            <button>Interest</button>
         </div>
 
-        <div>
-            <button id="withdrawal">Make Withdrawal</button>
+        <div id="a">
+            <span>Balance</span>
         </div>
 
-            <button id="check_history">Transaction History</button>
-
-        <div>
-            <button id="check_interest">Interest</button>
+        <div id="output">
         </div>
 
-        <div id="a"><span>Balance</span></div><div id="output"></div>
-        <div id="b"><span>Interest</span></div><div id="interest_output"></div>
-        <div id="c"><span>History</span></div><div id="history"></div>
+
+        <div id="b">
+            <span>Interest</span>
+        </div>
+
+
+        <div id="interest_output">
+        </div>
+
+
+        <div id="c">
+            <span>History</span>
+        </div>
+
+        <div id="history">
+        </div>
 
         <script>
 
@@ -93,10 +101,10 @@
             let history_ = document.querySelector('#check_history')
             let int_output = document.querySelector('#interest_output')
             let history_display = document.querySelector('#history')
-            let account = 5000
+            let account = 0
             let amount = 0
             let interest = 0.1
-            let history = ['hi iqmar']
+            let history = []
             let deposit_count = 0
 
             check_interest.onclick = function check_interest(){
