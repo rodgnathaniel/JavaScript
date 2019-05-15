@@ -16,8 +16,8 @@
     #image{
         margin-left: 4%;
     }
-     #body {
-        background-color: aquamarine;
+     body {
+        background-color: rgb(70,130,180);
         background-size:cover;
      }
      header {
@@ -28,26 +28,48 @@
         margin: 3% 30% 1% 30%;
         padding: 0%;
         border-radius: 12px;
+        background-color: rgba(176,224,230,.4);
      }
      #amount{
-         margin-left: 44%;
-         width: 12%;
-         height: 12%;
-         text-align: center;
+        color: rgba(300,300,300,1);
+        background-color: rgba(0,0,0,.7);
+        margin-left: 40%;
+        width: 20%;
+        height: 12%;
+        text-align: center;
+        font-family: 'Righteous', cursive;
 
      }
      
      #atm_btn{
          display: flex;
          flex-direction: row;
-         margin-left: 24%;
+         margin-left: 31%;
      }
      #atm_btn button{
-         color: rgba(0,0,0,.7);
-         width: 15%;
+         color: rgba(300,300,300,1);
+         background-color: rgba(0,0,0,.7);
+         width: 12%;
          height: 50%;
          border-radius: 8px;
          margin: 2%1%2%1%;
+         font-family: 'Righteous', cursive;
+     }
+     #atm_btn button:hover{
+        background-color: rgba(300,300,300,1);
+        color: rgba(0,0,0,.7);
+     }
+
+     #balance_div, #interest_div, #history_div{
+         display: flex;
+         flex-direction: column;
+         color: black;
+         padding: 1.5%1.5%1.5%1.5%;
+         margin-left: 31%;
+         margin-right: 31%;
+         font-family: 'Righteous', cursive;
+         background-color: rgba(176,224,230,.4);
+     
      }
     </style>
     </head>
@@ -57,46 +79,37 @@
             <img id="image" src="https://bohapus.com/image/catalog/facilities/withdrawing-money-from-atm.png" width="25%" height="25%"/>
         </header>
 
-        <input id="amount" type="text" placeholder="Desired Amount"/>
+        <input id="amount" type="text" placeholder="Enter Desired Amount"/>
 
         <div id="atm_btn">
-            <button>Make Deposit</button>
-            <button>Withdrawal</button>
-            <button>History</button>
-            <button>Interest</button>
+            <button id="deposit">Make Deposit</button>
+            <button id="withdrawal">Withdrawal</button>
+            <button id="check_history">History</button>
+            <button id="check_interest">Interest</button>
         </div>
 
-        <div id="a">
-            <span>Balance</span>
+        <div id="balance_div">
+            <span>Balance:</span>
+            <div id="output"></div>
         </div>
 
-        <div id="output">
+        <div id="interest_div">
+            <span>Interest:</span>
+            <div id="interest_output"></div>
         </div>
 
-
-        <div id="b">
-            <span>Interest</span>
-        </div>
-
-
-        <div id="interest_output">
-        </div>
-
-
-        <div id="c">
-            <span>History</span>
-        </div>
-
-        <div id="history">
+        <div id="history_div">
+            <span>History:</span>
+            <div id="history"></div>
         </div>
 
         <script>
 
             let body = document.querySelector('#body')
-            let deposit_ = document.querySelector('#deposit')
+            let deposit = document.querySelector('#deposit')
             let amount_ = document.querySelector('#amount')
             let withdrawal_ = document.querySelector('#withdrawal')
-            let output_ = document.querySelector('#output')
+            let output = document.querySelector('#output')
             let interest_ = document.querySelector('#check_interest')
             let history_ = document.querySelector('#check_history')
             let int_output = document.querySelector('#interest_output')
@@ -107,15 +120,15 @@
             let history = []
             let deposit_count = 0
 
-            check_interest.onclick = function check_interest(){
+            interest_.onclick = function(){
                 int_output.innerText = account * interest
             }
 
-            deposit_.onclick = function deposit(){
+            deposit.onclick = function(){
                 amount = Number(amount_.value)
-                history.push('deposited $' + amount)
+                history.push('    deposited $' + amount)
                 account += amount
-                output_.innerText = account
+                output.innerText = account
                 deposit_count += 1
                 console.log(deposit_count)
             }
@@ -123,19 +136,19 @@
                 document.querySelector('#body').style.color = "red";
             }
 
-            withdrawal_.onclick = function withdrawal(){
+            withdrawal_.onclick = function(){
                 if (account - amount < 0) {
-                    output_.innerText = ('sorry you don\'t have that much money')
+                    output.innerText = ('sorry you don\'t have that much money')
 
                 } else {
                     amount = Number(amount_.value)
                     history.push('withdrew $' + amount)
                     account -= amount
-                    output_.innerText = account
+                    output.innerText = account
                 }
             }
 
-            history_.onclick = function transaction_history(){
+            history_.onclick = function(){
                 history_display.innerText = history
             }
             
