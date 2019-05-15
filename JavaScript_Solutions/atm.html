@@ -5,22 +5,26 @@
         <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
     <style>
 
+    body {
+        background-color: rgb(70,130,180);
+        background-size:cover;
+    }
+
     .flex{
         display: flex;
         flex-direction: row;
     }
+
     h1{
         padding-left: 8%;
         font-size: 210%;
     }
+
     #image{
         margin-left: 4%;
     }
-     body {
-        background-color: rgb(70,130,180);
-        background-size:cover;
-     }
-     header {
+
+    header {
         color: black;
         font-family: 'Righteous', cursive;
         font-size: 160%;
@@ -29,8 +33,9 @@
         padding: 0%;
         border-radius: 12px;
         background-color: rgba(176,224,230,.4);
-     }
-     #amount{
+    }
+
+    #amount{
         color: rgba(300,300,300,1);
         background-color: rgba(0,0,0,.7);
         margin-left: 40%;
@@ -38,46 +43,73 @@
         height: 12%;
         text-align: center;
         font-family: 'Righteous', cursive;
+        cursor:pointer;
+        overflow: hidden;  
+        outline: none;
+    }
 
-     }
-     
-     #atm_btn{
-         display: flex;
-         flex-direction: row;
-         margin-left: 31%;
-     }
-     #atm_btn button{
-         color: rgba(300,300,300,1);
-         background-color: rgba(0,0,0,.7);
-         width: 12%;
-         height: 50%;
-         border-radius: 8px;
-         margin: 2%1%2%1%;
-         font-family: 'Righteous', cursive;
-     }
-     #atm_btn button:hover{
+    #refresh{
+        color: rgba(300,300,300,1);
+        background-color: rgba(0,0,0,.7);
+        width: 12%;
+        height: 50%;
+        border-radius: 8px;
+        margin: .5%0%1%44%;
+        font-family: 'Righteous', cursive;
+        cursor:pointer;
+        overflow: hidden;  
+        outline: none;
+    }
+
+    #refresh:hover{
         background-color: rgba(300,300,300,1);
         color: rgba(0,0,0,.7);
-     }
+    }
 
-     #balance_div, #interest_div, #history_div{
-         display: flex;
-         flex-direction: column;
-         color: black;
-         padding: 1.5%1.5%1.5%1.5%;
-         margin-left: 31%;
-         margin-right: 31%;
-         font-family: 'Righteous', cursive;
-         background-color: rgba(176,224,230,.4);
-     
-     }
+    #atm_btn{
+        display: flex;
+        flex-direction: row;
+        margin-left: 31%;
+    }
+
+    #atm_btn button{
+        color: rgba(300,300,300,1);
+        background-color: rgba(0,0,0,.7);
+        width: 12%;
+        height: 50%;
+        border-radius: 8px;
+        margin: 2%1%2%1%;
+        font-family: 'Righteous', cursive;
+        cursor:pointer;
+        overflow: hidden;  
+        outline: none;
+    }
+
+    #atm_btn button:hover{
+        background-color: rgba(300,300,300,1);
+        color: rgba(0,0,0,.7);
+    }
+
+    #balance_div, #interest_div, #history_div{
+        display: flex;
+        flex-direction: column;
+        color: black;
+        padding: 1.5%1.5%1.5%1.5%;
+        margin-left: 31%;
+        margin-right: 31%;
+        font-family: 'Righteous', cursive;
+        background-color: rgba(176,224,230,.4);
+    }
+
     </style>
     </head>
     <body>
         <header class="flex">
-            <h1>Virtual Atm</h1>
+            <h1 id="txt">Virtual Atm</h1>
             <img id="image" src="https://bohapus.com/image/catalog/facilities/withdrawing-money-from-atm.png" width="25%" height="25%"/>
         </header>
+
+        <button id="refresh">Refresh</button>
 
         <input id="amount" type="text" placeholder="Enter Desired Amount"/>
 
@@ -114,11 +146,18 @@
             let history_ = document.querySelector('#check_history')
             let int_output = document.querySelector('#interest_output')
             let history_display = document.querySelector('#history')
+            let refresh = document.querySelector('#refresh')
+
+
             let account = 0
             let amount = 0
             let interest = 0.1
             let history = []
             let deposit_count = 0
+
+            refresh.onlick = function(){
+                window.location.reload()
+            }
 
             interest_.onclick = function(){
                 int_output.innerText = account * interest
@@ -138,7 +177,7 @@
 
             withdrawal_.onclick = function(){
                 if (account - amount < 0) {
-                    output.innerText = ('sorry you don\'t have that much money')
+                    output.innerText = ('Sorry, you do not have that much money available.')
 
                 } else {
                     amount = Number(amount_.value)
